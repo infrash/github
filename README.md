@@ -1,4 +1,17 @@
 # github
+
+update repositories from github  
+
+    ./github
+
+clone all repositories from organisation
+
+    ./github clone
+
+push all repositories from folder
+
+    ./github push
+
 load all projects and manage on github 
     
     chmod a+x repos.sh

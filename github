@@ -1,8 +1,13 @@
 #!/bin/bash
+# CONTRIBUTION
+## Author: Tom Sapletta
+## Created Date: 17.04.2022
+#
 ## CONFIG
 ACTION="$@"
 #[ "$ACTION" = "" ] && ACTION="status"
 REPO_LIST=$(cat .github.repos)
+ORG=$(cat .github.org)
 USER=$(cat .github.user)
 TOKEN=$(cat .github.token)
 ## COLORS
@@ -11,11 +16,15 @@ RED='\033[1;35m'
 NC='\033[0m' # No Color
 ## START
 #echo -e "${BLUE}$ACTION${NC}"
-##
+## save path to rerstart command
 START=$(pwd)
+## for empty param
 if [ -z "$ACTION" ]
 then
-  echo $REPO_LIST
+  # UPDATE
+  ./repos.sh > .github.repos
+  REPO_LIST=$(cat .github.repos)
+  echo "$REPO_LIST"
 else
   for input in $REPO_LIST; do
      URL=${input//[$'\t\r\n']}

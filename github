@@ -1,0 +1,38 @@
+#!/bin/bash
+## CONFIG
+ACTION="$@"
+#[ "$ACTION" = "" ] && ACTION="status"
+REPO_LIST=$(cat .github.repos)
+USER=$(cat .github.user)
+TOKEN=$(cat .github.token)
+## COLORS
+BLUE='\033[1;34m'
+RED='\033[1;35m'
+NC='\033[0m' # No Color
+## START
+#echo -e "${BLUE}$ACTION${NC}"
+##
+START=$(pwd)
+if [ -z "$ACTION" ]
+then
+  echo $REPO_LIST
+else
+  for input in $REPO_LIST; do
+     URL=${input//[$'\t\r\n']}
+     BRANCH=${URL##*/}
+     FOLDER_NAME=${BRANCH//.git}
+     PROJECT_BRANCH=${URL##*/github.com/}
+     URL_AUTH="https://$USER:$TOKEN@github.com/$PROJECT_BRANCH"
+     ##LINE="git $ACTION"
+     #echo "sh github.project $URL"
+     #FOLDER_NAME=${"sh github.project $URL"}
+     LINE="cd $FOLDER_NAME && git $ACTION && cd .."
+     [ $ACTION = "clone" ] && LINE="git clone $URL_AUTH"
+     PRINT="git $ACTION $URL"
+     echo
+     echo -e "${RED}$PRINT${NC}"
+     [ "$URL" ] && eval "$LINE"
+     cd $START
+     echo
+  done
+fi

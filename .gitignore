@@ -1,3 +1,10 @@
+.idea/
+.github.*
+.github.repos
+.github.token
+.github.org
+.github.user
+.github.pass
 # Logs
 logs
 *.log
@@ -102,3 +109,5 @@ dist
 
 # TernJS port file
 .tern-port
+/github.txt
+/.projects

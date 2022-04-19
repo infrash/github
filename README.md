@@ -31,3 +31,14 @@ GitHub Docs: [Creating a personal access token](https://docs.github.com/en/authe
 Save to file
     
     .github.token
+
+```bash
+chmod +x github
+github init
+github status
+github clone
+github pull
+github pull origin
+chmod +x projects
+./projects rm -rf 
+```

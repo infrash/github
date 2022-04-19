@@ -2,7 +2,7 @@
 # CONTRIBUTION
 ## Author: Tom Sapletta
 ## Created Date: 17.04.2022
-#
+
 # CONFIG
 ## Github_Organisation
 ORG=$(cat .github.org)
@@ -19,5 +19,5 @@ BASEURL="https://api.github.com/orgs/$ORG/repos"
 #curl "curl https://api.github.com/orgs/$ORG/repos?per_page=100"
 i=1
 result=`curl -s -u $USERNAME:$TOKEN -H 'Accept: application/vnd.github.v3+json' ${BASEURL}?per_page=${PERPAGE}\&page=${i} 2>&1`
-echo $result > tempfile
-cat tempfile|jq '.[]| [.clone_url]| @csv'|tr -d '\\"'
+echo $result > .github.request
+cat .github.request|jq '.[]| [.name]| @csv'|tr -d '\\"'

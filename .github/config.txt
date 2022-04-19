@@ -1,0 +1,5 @@
+.github.org
+.github.projects
+.github.repos
+.github.token
+.github.user

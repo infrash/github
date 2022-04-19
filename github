@@ -26,6 +26,15 @@ then
   REPO_LIST=$(cat .github.repos)
   echo "$REPO_LIST"
 else
+## TODO: functions
+## TODO: check function list, if exist in folder, if not do another
+
+  [ $ACTION = "help" ] &&  sh .github/$ACTION.sh && exit 0
+  [ $ACTION = "config" ] && sh .github/$ACTION.sh && exit 0
+  [ $ACTION = "projects" ] &&  sh .github/$ACTION.sh > .github.projects && exit 0
+  [ $ACTION = "repos" ] &&  sh .github/$ACTION.sh > .github.repos && exit 0
+## TODO:
+## TODO:
   for input in $REPO_LIST; do
      URL=${input//[$'\t\r\n']}
      BRANCH=${URL##*/}

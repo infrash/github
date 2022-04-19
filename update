@@ -1,0 +1,59 @@
+#!/bin/bash
+# CONTRIBUTION
+## Author: Tom Sapletta
+## Created Date: 17.04.2022
+#
+## CONFIG
+REPO=$(cat .github.update)
+echo $REPO
+ORG=$(cat .github.org)
+USER=$(cat .github.user)
+TOKEN=$(cat .github.token)
+## COLORS
+BLUE='\033[1;34m'
+RED='\033[1;35m'
+NC='\033[0m' # No Color
+## START
+#echo -e "${BLUE}$ACTION${NC}"
+## save path to restart command
+START=$(pwd)
+## for empty param
+#URL=${REPO//[$'\t\r\n']//}
+URL=${REPO}
+#echo BRANCH="$(basename $URL)"
+FILENAME=${URL##*/}
+echo "${FILENAME}"
+NAME=${FILENAME%%.*}
+#echo NAME=${FILENAME%.*}
+#URL_WITHOUT_EXT=${URL%.*}
+#echo xpath=${URL%/*}
+#echo BRANCH=${URL_WITHOUT_EXT/$xpath/1}
+#echo FILENAME=$(URL/$URL_WITHOUT_EXT/2)
+#echo PROTOCOL=${URL%%://*}
+#echo PROTOCOL=${URL%%/*}
+URL_WITHOUT_PROTOCOL=${URL#*//}
+#echo URL_WITHOUT_PROTOCOL=${URL##*//}
+#echo URL_WITHOUT_PROTOCOL="${URL#*/}"
+#echo "$URL_WITHOUT_PROTOCOL"
+#echo NAME=${FILENAME*/}
+#echo NAME=${FILENAME##*/}
+#echo EXT=`basename $FILENAME .git`
+#echo tail="${URL_WITHOUT_PROTOCOL#/*/*/}"
+#echo fname="${PROJECT_BRANCH%.*}"
+#echo file=$( echo ${PROJECT_BRANCH##*/} )
+#echo DOT=`dirname "$URL_WITHOUT_PROTOCOL"`
+#echo EXT=${URL##*.}
+
+URL_AUTH="https://$USER:$TOKEN@$URL_WITHOUT_PROTOCOL"
+#FOLDER_NAME=${"sh github.project $URL"}
+#LINE="git clone && cd .."
+TEMP="temp"
+mkdir $TEMP
+git clone $URL_AUTH $TEMP
+echo "$NAME"
+#cp $TEMP .
+#cd $NAME
+#ls -la
+echo
+#cd $START
+
